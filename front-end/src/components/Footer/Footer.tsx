@@ -64,6 +64,47 @@ const Footer = () => {
           </ul>
         </div>
         {/* end navigations */}
+        <div className="col-span-10 md:order-first md:col-span-4 lg:col-span-2">
+          {/* start logo  */}
+          <img
+            src=""
+            alt="logo"
+            className="brightness-0 invert mx-auto md:mx-0"
+          />
+          <p className="text-sm text-dark-light text-center mt-4 md:text-left md:text-base lg:text-sm">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          </p>
+          {/* end logo  */}
+          {/* start social media icons */}
+          <ul className="flex justify-center items-center mt-5 space-x-4 text-gray-300 md:justify-start">
+            <li>
+              <a href="/">
+                <TwitterIcon className="w-6 h-auto" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <GitHubIcon className="w-6 h-auto" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <InstagramIcon className="w-6 h-auto" />
+              </a>
+            </li>
+            <li>
+              <a href="/">
+                <FacebookIcon className="w-6 h-auto" />
+              </a>
+            </li>
+          </ul>
+          {/* end social media icons */}
+        </div>
+        <div className="hidden md:flex flex-col items-center space-y-4 md:col-span-12 lg:col-span-10">
+          <p className=" text-dark-light">
+            © Copyright 2023 Savindi Dadallage. All Rights Reserved.
+          </p>
+        </div>
       </footer>
       {/* end footer section  */}
     </section>
