@@ -24,6 +24,46 @@ const Footer = () => {
             </li>
           </ul>
         </div>
+        <div className="col-span-5 md:col-span-4 lg:col-span-2">
+          <h3 className="text-dark-light font-bold md:text-lg">Services</h3>
+          <ul className="text-[#959EAD] text-sm mt-5 space-y-4 md:text-base">
+            <li>
+              <a href="/">Design</a>
+            </li>
+            <li>
+              <a href="/">Themes</a>
+            </li>
+            <li>
+              <a href="/">UI Kit</a>
+            </li>
+          </ul>
+        </div>
+        <div className="col-span-5 md:col-span-4 md:col-start-5 lg:col-start-auto lg:col-span-2">
+          <h3 className="text-dark-light font-bold md:text-lg">Company</h3>
+          <ul className="text-[#959EAD] text-sm mt-5 space-y-4 md:text-base">
+            <li>
+              <a href="/">About</a>
+            </li>
+            <li>
+              <a href="/">Terms</a>
+            </li>
+            <li>
+              <a href="/">Privacy Policy</a>
+            </li>
+          </ul>
+        </div>
+        <div className="col-span-5 md:col-span-4 lg:col-span-2">
+          <h3 className="text-dark-light font-bold md:text-lg">More</h3>
+          <ul className="text-[#959EAD] text-sm mt-5 space-y-4 md:text-base">
+            <li>
+              <a href="/">License</a>
+            </li>
+            <li>
+              <a href="/">Changelog</a>
+            </li>
+          </ul>
+        </div>
+        {/* end navigations */}
       </footer>
       {/* end footer section  */}
     </section>
