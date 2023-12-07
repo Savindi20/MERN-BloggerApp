@@ -55,8 +55,6 @@ npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 ```
 npm install @mui/material @emotion/react @emotion/styled
 ```
-##
-
 #
 - **`Not Detected Node Modules`**
 ```
