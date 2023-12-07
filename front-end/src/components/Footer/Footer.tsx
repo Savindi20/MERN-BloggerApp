@@ -3,6 +3,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { images } from "../../constants/Images";
 
 const Footer = () => {
   return (
@@ -67,9 +68,9 @@ const Footer = () => {
         <div className="col-span-10 md:order-first md:col-span-4 lg:col-span-2">
           {/* start logo  */}
           <img
-            src=""
+            src={images.LogoImage}
             alt="logo"
-            className="brightness-0 invert mx-auto md:mx-0"
+            className="w-14 h-14 rounded-full"
           />
           <p className="text-sm text-dark-light text-center mt-4 md:text-left md:text-base lg:text-sm">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit.
