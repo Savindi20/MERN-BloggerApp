@@ -1,5 +1,27 @@
 import React from 'react'
 
+interface NavItem {
+  title: string;
+  link: string;
+}
+
+const NavItemsInfo = [
+  { name: "Home", type: "link" },
+  {
+    name: "Articles",
+    type: "Enter",
+    items: [{ title: "Articles", link: "/article" }],
+  },
+  {
+    name: "Pages",
+    type: "dropdown",
+    items: [
+      { title: "About us", link: "/about" },
+      { title: "Contact us", link: "/contact" },
+    ],
+  },
+];
+
 function Header() {
 
   return (
