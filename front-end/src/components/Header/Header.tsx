@@ -35,6 +35,11 @@ interface HeaderProps {
 }
 
 const NavItem: React.FC<HeaderProps> = ({ item }) => {
+  const [dropdown, setDropdown] = useState(false);
+
+  const toggleDropdownHandler = () => {
+    setDropdown((curState) => !curState);
+  };
 
   return (
     <li className="relative group">
@@ -51,16 +56,17 @@ const NavItem: React.FC<HeaderProps> = ({ item }) => {
         <div className="flex flex-col items-center">
           <button
             className="px-4 py-2 flex gap-x-1 items-center"
-            onClick={() => {}}
+            onClick={toggleDropdownHandler}
           >
             <span>{item.name}</span>
             <KeyboardArrowDownIcon />
           </button>
           <div
-            className={`${item.type === "dropdown" ? "block" : "hidden"
+            className={`${
+              dropdown ? "block" : "hidden"
             } lg:hidden transition-all duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max`}
           >
-            <ul className="bg-dark-soft lg:bg-transparent text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
+            <ul className="bg-dark-soft lg:bg-white text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
               {item.items?.map((page, index) => (
                 <a
                   key={index}
@@ -119,4 +125,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header
+export default Header;
