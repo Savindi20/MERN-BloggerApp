@@ -78,17 +78,45 @@ const NavItem: React.FC<HeaderProps> = ({ item }) => {
   );
 };
 
-function Header() {
+const Header: React.FC = () => {
+  const [navIsVisible, setNavIsVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const navVisibilityHandler = () => {
+    setNavIsVisible((curState) => !curState);
+  };
 
   return (
     <section className="sticky top-0 left-0 right-0 z-50 bg-white">
       <header className="container mx-auto px-5 flex justify-between py-4 items-center">
         <div>{/* <img className="w-16" src="" alt="logo" /> */}</div>
         <div className="lg:hidden z-50">
+          {navIsVisible ? (
+            <CloseIcon className="w-6 h-6" onClick={navVisibilityHandler} />
+          ) : (
+            <MenuIcon className="w-6 h-6" onClick={navVisibilityHandler} />
+          )}
+        </div>
+        <div
+          className={`${
+            navIsVisible ? "right-0" : "-right-full "
+          } transition-all duration-300 mt-[56px] lg:mt-0 bg-dark-hard lg:bg-white z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center`}
+        >
+          <ul className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-2 font-semibold font-Ubuntu">
+            {NavItemsInfo.map((item, index) => (
+              <NavItem key={index} item={item} />
+            ))}
+          </ul>
+          <button
+            onClick={() => navigate("/login")}
+            className="mt-5 lg:mt-0 font-Ubuntu border-2 border-purple-600 px-6 py-2 rounded-full text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 text-center"
+          >
+            Sign in
+          </button>
         </div>
       </header>
     </section>
-  )
-}
+  );
+};
 
 export default Header
