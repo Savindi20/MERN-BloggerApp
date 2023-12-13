@@ -1,7 +1,5 @@
 # MERN-BloggerApp
 
-##
-
 # Getting Started with Create React App
 
 This Project is introduced to FrontEnd Using React, TypeScript and Tailwind CSS
