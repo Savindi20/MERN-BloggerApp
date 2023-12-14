@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import Card from "../Card/Card";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import axios from "../../axios";
+import { PostDetails } from "../../types/PostDetails";
 
 const Articles = () => {
+  const [postList, setPostList] = useState<PostDetails[]>([]);
   const [showAllPosts, setShowAllPosts] = useState(false);
+  const visiblePosts = showAllPosts ? postList : postList.slice(0, 3);
 
   const handleShowAllPosts = () => {
     setShowAllPosts(true);
@@ -20,6 +24,7 @@ const Articles = () => {
       .get("post")
       .then((res) => {
         console.log(res);
+        setPostList(res.data.responseData);
       })
       .catch((error) => {
         console.log(error);
@@ -29,6 +34,22 @@ const Articles = () => {
   return (
     <section className="flex flex-col container mx-auto px-5 py-10">
       <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+        {visiblePosts.map((post) => (
+          <Card
+            key={post._id}
+            _id={post._id}
+            imageId={post.imageId}
+            title={post.title}
+            caption={post.caption}
+            description={post.description}
+            date={post.date}
+            userName={post.userName}
+            tags={post.tags}
+            categoryId={post.categoryId}
+            className="my-card w-full md:w-[calc(50%-20px)] lg:w-[calc(33.33%-21px)]"
+          />
+        ))}
+        ;
       </div>
       {!showAllPosts && (
         <button
