@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import axios from "../../axios";
 
 const Articles = () => {
   const [showAllPosts, setShowAllPosts] = useState(false);
@@ -15,6 +16,14 @@ const Articles = () => {
 
   const retrieveAllPosts = () => {
     // retrieve all posts
+    axios
+      .get("post")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
