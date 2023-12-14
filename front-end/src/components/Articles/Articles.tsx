@@ -8,8 +8,19 @@ const Articles = () => {
     setShowAllPosts(true);
   };
 
+  useEffect(() => {
+    // use effect
+    retrieveAllPosts();
+  }, []);
+
+  const retrieveAllPosts = () => {
+    // retrieve all posts
+  };
+
   return (
     <section className="flex flex-col container mx-auto px-5 py-10">
+      <div className="flex flex-wrap md:gap-x-5 gap-y-5 pb-10">
+      </div>
       {!showAllPosts && (
         <button
           onClick={handleShowAllPosts}
