@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { PostProps } from "../../types/PostProps";
 import { image } from "../../types/Image";
+import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
 import { UserProps } from "../../types/User";
 
@@ -8,6 +9,37 @@ const Card: FC<PostProps> = (props) => { // props: PostProps
   const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
   const navigate = useNavigate(); // Add useNavigate hook
   const [userList, setUserList] = useState<UserProps[]>([]);
+
+  useEffect(() => { // useEffect
+    retrieveImage();
+    retrieveAllUsers();
+  }, []);
+
+  const retrieveImage = () => {
+    // retrieve image based on imageId
+    axios
+      .get(`image`)
+      .then((res) => {
+        console.log(res);
+        setImageList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const retrieveAllUsers = () => {
+    // retrieve all posts
+    axios
+      .get("user")
+      .then((res) => {
+        console.log(res);
+        setUserList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const handleCardClick = (postId: string) => {
     localStorage.setItem("postId", postId); // Store postId in localStorage
