@@ -1,11 +1,17 @@
-import React from 'react'
+import React from "react";
+import MainLayout from "../../components/MainLayout/MainLayout";
+import Hero from "./container/Hero/Hero";
+import Articles from "../../components/Articles/Articles";
+import CTA from "./container/CTA/CTA";
 
-function home() {
+const Home = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <MainLayout>
+      <Hero />
+      <Articles />
+      <CTA />
+    </MainLayout>
+  );
+};
 
-export default home
+export default Home;
