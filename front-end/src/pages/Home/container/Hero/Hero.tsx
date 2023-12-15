@@ -1,9 +1,25 @@
-import React from 'react'
+import React from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import { images } from "../../../../constants/Images";
 
-function Hero() {
+const Hero = () => {
   return (
-    <div>Hero</div>
-  )
-}
+    <section className="container mx-auto flex flex-col px-5 py-5 lg:flex-row">
+      <div className="mt-10 lg:w-1/2">
+        <h1 className="font-ubuntu text-3xl text-center font-bold text-dark-soft md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px]">
+          Read the most interesting articles
+        </h1>
+      </div>
 
-export default Hero
+      <div className="hidden lg:block lg:1/2">
+        <img
+          className="w-full"
+          src={images.HeroImage}
+          alt="users are reading articles"
+        />
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
