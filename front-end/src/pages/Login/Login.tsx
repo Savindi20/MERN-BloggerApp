@@ -12,6 +12,40 @@ const Login = () => {
             Login
           </h1>
           <form>
+            <div className="flex flex-col mb-6 w-full">
+              <label
+                htmlFor="email"
+                className="text-[#5a7184] font-semibold block"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                name="email"
+                pattern="^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$"
+                required
+                className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
+              />
+            </div>
+            <div className="flex flex-col mb-6 w-full">
+              <label
+                htmlFor="password"
+                className="text-[#5a7184] font-semibold block"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password"
+                name="password"
+                pattern=".{6,}"
+                required
+                className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
+              />
+            </div>
             <Link to="" className="text-sm font-semibold text-primary">
               Forgot password?
             </Link>
