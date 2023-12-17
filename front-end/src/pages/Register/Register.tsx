@@ -46,6 +46,40 @@ function Register() {
                 className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
               />
             </div>
+            <div className="flex flex-col mb-6 w-full">
+              <label
+                htmlFor="password"
+                className="text-[#5a7184] font-semibold block"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                pattern=".{6,}"
+                required
+                className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
+              />
+            </div>
+            <div className="flex flex-col mb-6 w-full">
+              <label
+                htmlFor="confirmPassword"
+                className="text-[#5a7184] font-semibold block"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="verifyPassword"
+                placeholder="Enter confirm password"
+                pattern=".{6,}"
+                required
+                className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
+              />
+            </div>
             <button
               type="submit"
               className="bg-purple-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
