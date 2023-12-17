@@ -1,8 +1,29 @@
-import React from "react";
+import { ChangeEvent } from "react";
 import MainLayout from "../../components/MainLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Register() {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [verifyPassword, setVerifyPassword] = useState<string>("");
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+
+    if (name === "name") {
+      setName(value);
+    } else if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    } else if (name === "verifyPassword") {
+      setVerifyPassword(value);
+    }
+  };
+
+  const isRegisterButtonDisabled = password !== verifyPassword;
 
   return (
     <MainLayout>
@@ -24,6 +45,7 @@ function Register() {
                 id="name"
                 name="name"
                 placeholder="Enter name"
+                onChange={handleInputChange}
                 pattern="[A-Za-z\s]+"
                 required
                 className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
@@ -41,6 +63,7 @@ function Register() {
                 id="email"
                 name="email"
                 placeholder="Enter email"
+                onChange={handleInputChange}
                 pattern="^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$"
                 required
                 className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
@@ -58,6 +81,7 @@ function Register() {
                 id="password"
                 name="password"
                 placeholder="Enter password"
+                onChange={handleInputChange}
                 pattern=".{6,}"
                 required
                 className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
@@ -75,6 +99,7 @@ function Register() {
                 id="confirmPassword"
                 name="verifyPassword"
                 placeholder="Enter confirm password"
+                onChange={handleInputChange}
                 pattern=".{6,}"
                 required
                 className="placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border"
@@ -82,6 +107,7 @@ function Register() {
             </div>
             <button
               type="submit"
+              disabled={isRegisterButtonDisabled}
               className="bg-purple-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               Register
