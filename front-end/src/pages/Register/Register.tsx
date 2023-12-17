@@ -2,12 +2,24 @@ import { ChangeEvent } from "react";
 import MainLayout from "../../components/MainLayout";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "../../axios";
+import Swal from "sweetalert2";
+
+type UserDetails = {
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+};
 
 function Register() {
+  const [userList, setUserList] = useState<UserDetails[]>([]);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [verifyPassword, setVerifyPassword] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -23,6 +35,48 @@ function Register() {
     }
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    let newUser = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    if (verifyPassword === password) {
+      axios
+        .post("user", newUser)
+        .then((res) => {
+          console.log(res);
+          let user: UserDetails[] = [...userList];
+          user.push(res.data.responseData);
+          console.log(res.data.responseData);
+          setUserList(user);
+          navigate("/login", { replace: false });
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Registered Successful..!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Something Went Wrong..!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+    } else {
+      alert("Password and Confirm Password should be the same");
+    }
+  };
+
   const isRegisterButtonDisabled = password !== verifyPassword;
 
   return (
@@ -32,7 +86,7 @@ function Register() {
           <h1 className="font-roboto text-2xl font-bold text-center text-dark-hard mb-8">
             Sign Up
           </h1>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="flex flex-col mb-6 w-full">
               <label
                 htmlFor="name"
