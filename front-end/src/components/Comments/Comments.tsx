@@ -1,5 +1,6 @@
 import React from "react";
 import images from "../../constants/Images/images";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import CommentForm from "./CommentForm/CommentForm";
@@ -23,17 +24,33 @@ const Comments = ({
   logginedUserId,
   affectedComment,
   setAffectedComment,
+  addComment,
+  parentId = null,
   updateComment,
   deleteComment,
-
+  replies,
+  
 }: CommentsProps) => {
+  const isUserLoggined = Boolean(logginedUserId);
   const commentBelongsToUser = logginedUserId === comment.user._id;
+  // start replying condition
+  const isReplying =
+    affectedComment &&
+    affectedComment.type === "replying" &&
+    affectedComment._id === comment._id;
+  // end replying condition
   // start editing condition
   const isEditing =
     affectedComment &&
     affectedComment.type === "editing" &&
     affectedComment._id === comment._id;
   // end editing condition
+  // start reply comment ID
+  const repiledCommentId = parentId ? parentId : comment._id;
+  // end reply comment ID
+  // start reply user ID
+  const replyOnUserId = comment.user._id;
+  // end reply user ID
 
   return (
     // start comment wrapper
@@ -79,6 +96,19 @@ const Comments = ({
         )}
 
         <div className="flex items-center gap-x-3 text-dark-light font-Ubuntu text-sm mt-3 mb-3">
+          {isUserLoggined && (
+            // start reply button
+            <button
+              className="flex items-center space-x-2"
+              onClick={() =>
+                setAffectedComment({ type: "replying", _id: comment._id })
+              }
+            >
+              <ChatBubbleOutlineIcon className="w-4 h-auto" />
+              <span>Reply</span>
+            </button>
+            //  end reply button
+          )}
 
           {commentBelongsToUser && (
             <>
@@ -105,6 +135,34 @@ const Comments = ({
             </>
           )}
         </div>
+        {isReplying && (
+          <CommentForm
+            btnLabel="Reply"
+            formSubmitHandler={(value) =>
+              addComment(value, repiledCommentId, replyOnUserId)
+            }
+            formCancleHandler={() => setAffectedComment(null)}
+            initialText={undefined}
+          />
+        )}
+        {/* {replies.length > 0 && ( */}
+        <div>
+          {replies.map((reply: { _id: React.Key | null | undefined; }) => (
+            <Comments
+              key={reply._id}
+              addComment={addComment}
+              affectedComment={affectedComment}
+              setAffectedComment={setAffectedComment}
+              comment={reply}
+              deleteComment={deleteComment}
+              logginedUserId={logginedUserId}
+              replies={[]}
+              updateComment={updateComment}
+              parentId={comment._id}
+            />
+          ))}
+        </div>
+        {/* )} */}
       </div>
     </div>
     // end comment wrapper
