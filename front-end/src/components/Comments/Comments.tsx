@@ -1,5 +1,10 @@
 import React from "react";
 import images from "../../constants/Images/images";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import CommentForm from "./CommentForm/CommentForm";
+
+
 
 interface CommentsProps {
   comment: any;
@@ -14,8 +19,21 @@ interface CommentsProps {
 }
 
 const Comments = ({
-  comment
+  comment,
+  logginedUserId,
+  affectedComment,
+  setAffectedComment,
+  updateComment,
+  deleteComment,
+
 }: CommentsProps) => {
+  const commentBelongsToUser = logginedUserId === comment.user._id;
+  // start editing condition
+  const isEditing =
+    affectedComment &&
+    affectedComment.type === "editing" &&
+    affectedComment._id === comment._id;
+  // end editing condition
 
   return (
     // start comment wrapper
@@ -42,6 +60,51 @@ const Comments = ({
             hour: "2-digit",
           })}
         </span>
+        {/* end commented date */}
+        {!isEditing && (
+          // start user description
+          <p className="font-opensans mt-[10px] text-dark-light">
+            {comment.desc}
+          </p>
+          // end user description
+        )}
+
+        {isEditing && (
+          <CommentForm
+            btnLabel="Update"
+            formSubmitHandler={(value) => updateComment(value, comment._id)}
+            formCancleHandler={() => setAffectedComment(null)}
+            initialText={comment.desc}
+          />
+        )}
+
+        <div className="flex items-center gap-x-3 text-dark-light font-Ubuntu text-sm mt-3 mb-3">
+
+          {commentBelongsToUser && (
+            <>
+              {/* start edit button  */}
+              <button
+                className="flex items-center space-x-2"
+                onClick={() =>
+                  setAffectedComment({ type: "editing", _id: comment._id })
+                }
+              >
+                <ModeEditOutlineOutlinedIcon className="w-4 h-auto" />
+                <span>Edit</span>
+              </button>
+              {/* end edit button  */}
+              {/* start delete button  */}
+              <button
+                className="flex items-center space-x-2"
+                onClick={() => deleteComment(comment._id)}
+              >
+                <DeleteOutlineIcon className="w-4 h-auto" />
+                <span>Delete</span>
+              </button>
+              {/* end delete button  */}
+            </>
+          )}
+        </div>
       </div>
     </div>
     // end comment wrapper
