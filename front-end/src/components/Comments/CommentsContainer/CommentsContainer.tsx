@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import CommentForm from "../CommentForm/CommentForm";
 import { getCommentsData } from "../../../data/Comments/Comments";
+import Comments from "../Comments";
+
 // start introducing props
 interface CommentsContainerProps {
   className?: string;
@@ -32,7 +34,11 @@ const CommentsContainer = ({
   const [comments, setComments] = useState<Comment[]>([]);
   // end state
 
-  const [setAffectedComment] = useState(null);
+  // start main comments
+  const mainComments = comments.filter((comment) => comment.parent === null);
+  // end main comments
+
+  const [affectedComment, setAffectedComment] = useState(null);
 
   console.log(comments);
 
@@ -53,7 +59,7 @@ const CommentsContainer = ({
       _id: Math.random().toString(),
       user: {
         _id: "a",
-        name: "Savindi Dadallage",
+        name: "Pasan Pahasara",
       },
       desc: value,
       post: "1",
@@ -65,8 +71,42 @@ const CommentsContainer = ({
     setComments((curState) => {
       return [newComment, ...curState];
     });
+    // end set comments
+    setAffectedComment(null);
   };
   // end add comment
+
+  // start update comment handler
+  const updateCommentHandler = (value: any, commentId: string) => {
+    const updateComments = comments.map((comment) => {
+      if (comment._id === commentId) {
+        return { ...comment, desc: value };
+      }
+      return comment;
+    });
+    setComments(updateComments);
+    setAffectedComment(null);
+  };
+  // end update comment handler
+
+  // start delete comment handler
+  const deleteCommentHandler = (commentId: string) => {
+    const updatedComments = comments.filter((comment) => {
+      return comment._id !== commentId;
+    });
+    setComments(updatedComments);
+  };
+  // end delete comment handler
+
+  const getRepliesHandler = (commentId: string | null) => {
+    return comments
+      .filter((comment) => comment.parent === commentId)
+      .sort((a, b) => {
+        return (
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        );
+      });
+  };
 
   return (
     <div className={`${className}`}>
@@ -80,6 +120,22 @@ const CommentsContainer = ({
         initialText={undefined}
       />
       {/* end added comment form  */}
+      <div className="space-y-4 mt-8">
+        {mainComments.map((comment) => (
+          <Comments
+            key={comment._id}
+            comment={comment}
+            logginedUserId={logginedUserId}
+            affectedComment={affectedComment}
+            setAffectedComment={setAffectedComment}
+            addComment={addCommentHandler}
+            parentId={undefined}
+            updateComment={updateCommentHandler}
+            deleteComment={deleteCommentHandler}
+            replies={getRepliesHandler(comment._id)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
