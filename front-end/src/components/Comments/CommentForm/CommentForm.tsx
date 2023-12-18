@@ -29,7 +29,7 @@ const CommentForm = ({
     // start form
     <form onSubmit={submitHandler}>
       <div className="flex flex-col items-end border border-purple-600 rounded-lg p-4">
-         {/* start textarea  */}
+        {/* start textarea  */}
         <textarea
           className="w-full focus:outline-none bg-transparent"
           rows={5}
