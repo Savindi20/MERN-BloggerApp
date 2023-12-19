@@ -1,8 +1,14 @@
 import React from 'react'
 
-function SocialShareButtons() {
+interface SocialShareButtonsProps{
+    url:any;
+    title:any;
+}
+
+const SocialShareButtons = ({url, title }:SocialShareButtonsProps) => {
   return (
-    <div>SocialShareButtons</div>
+    <div className="flex gap-4">
+    </div>
   )
 }
 
