@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import Articles from "../../components/Articles/Articles";
+import MainLayout from "../../components/MainLayout/MainLayout";
 
-function Article() {
+const Article = () => {
   return (
-    <div>Article</div>
-  )
-}
+    <>
+      <MainLayout>
+        <Articles />
+      </MainLayout>
+    </>
+  );
+};
 
-export default Article
+export default Article;
