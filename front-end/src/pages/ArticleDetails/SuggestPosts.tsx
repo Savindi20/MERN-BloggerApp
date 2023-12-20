@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PostDetails } from "../../types/PostDetails";
 import axios from "../../axios";
+import { image } from "../../types/Image";
 
 interface CardProps {
   className?: string;
@@ -11,10 +12,12 @@ interface CardProps {
 
 const SuggestPosts = ({ className, header, tags }: CardProps) => {
   const [allPosts, setAllPosts] = useState<PostDetails[]>([]); // Use PostDetails type for allPosts state
+  const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
 
   useEffect(() => {
     // use effect
     AllPosts();
+    retrieveImage();
   }, []);
 
   const AllPosts = () => {
@@ -29,6 +32,19 @@ const SuggestPosts = ({ className, header, tags }: CardProps) => {
       });
   };
 
+  const retrieveImage = () => {
+    // retrieve image based on imageId
+    axios
+      .get(`image`)
+      .then((res) => {
+        console.log(res);
+        setImageList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div
       className={`w-full shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-lg p-4 ${className}`}
@@ -36,6 +52,26 @@ const SuggestPosts = ({ className, header, tags }: CardProps) => {
       <h2 className="font-Ubuntu font-medium text-dark-hard md:text-xl">
         {header}
       </h2>
+      <div className="grid gap-y-5 mt-5 md:grid-cols-2 md:gap-x-5 lg:grid-cols-1">
+        {allPosts?.map((post) => (
+          // start id
+          <div
+            key={post._id}
+            className="flex space-x-3 flex-nowrap items-center"
+          >
+            {/* end id */}
+            {/* start image  */}
+            <img
+              className="aspect-square object-cover rounded-lg w-1/3 transition-transform duration-300 hover:scale-105 shadow-2xl"
+              src={
+                imageList.find((image) => image._id === post?.imageId)?.imageUrl
+              }
+              alt="ui ux"
+            />
+            {/* end image  */}
+          </div>
+        ))}
+      </div>
       <h2 className="font-Ubuntu font-medium text-dark-hard mt-8 md:text-xl">
         Tags
       </h2>
