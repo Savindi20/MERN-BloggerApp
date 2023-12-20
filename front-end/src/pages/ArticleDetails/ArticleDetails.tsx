@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import MainLayout from "../../components/MainLayout/MainLayout";
 import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs";
 import images from "../../constants/Images/images";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import SuggestPosts from "./container/SuggestedPosts/SuggestPosts";
 import CommentsContainer from "../../components/Comments/CommentsContainer/CommentsContainer";
 import SocialShareButtons from "../../components/SocialShareButtons/SocialShareButtons";
 import axios from "../../axios";
 import { PostDetails } from "../../types/PostDetails";
+import { image } from "../../types/Image";
 
 const breadCrumbsData = [
   { name: "Home", link: "/" },
@@ -58,10 +59,14 @@ const tagsData: string[] = [
 const ArticleDetails = (): JSX.Element => {
   const [postList, setPostList] = useState<PostDetails[]>([]);
   const [post, setPost] = useState<PostDetails | null>(null); // Use PostDetails type for post state
+  const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
+  const [allPosts, setAllPosts] = useState<PostDetails[]>([]); // Use PostDetails type for allPosts state
 
   useEffect(() => {
     // use effect
     retrieveAllPosts();
+    retrieveImage();
+    AllPosts();
   }, []);
 
   const retrieveAllPosts = () => {
@@ -78,6 +83,31 @@ const ArticleDetails = (): JSX.Element => {
       });
   };
 
+  const AllPosts = () => {
+    // retrieve all posts
+    axios
+      .get(`post`)
+      .then((res) => {
+        setAllPosts(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const retrieveImage = () => {
+    // retrieve image based on imageId
+    axios
+      .get(`image`)
+      .then((res) => {
+        console.log(res);
+        setImageList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <MainLayout>
@@ -88,7 +118,9 @@ const ArticleDetails = (): JSX.Element => {
             {/* image start  */}
             <img
               className="rounded-xl w-full transition-transform duration-300 hover:scale-105 shadow-2xl"
-              src=""
+              src={
+                imageList.find((image) => image._id === post?.imageId)?.imageUrl
+              }
               alt="ui ux"
             />
             {/* image end  */}
