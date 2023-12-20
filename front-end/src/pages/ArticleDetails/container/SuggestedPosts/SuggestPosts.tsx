@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { PostDetails } from "../../types/PostDetails";
-import axios from "../../axios";
-import { image } from "../../types/Image";
+import { PostDetails } from "../../../../types/PostDetails";
+import axios from "../../../../axios";
+import { image } from "../../../../types/Image";
 
 interface CardProps {
   className?: string;
