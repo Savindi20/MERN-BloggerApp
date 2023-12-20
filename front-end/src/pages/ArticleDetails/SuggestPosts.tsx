@@ -69,6 +69,20 @@ const SuggestPosts = ({ className, header, tags }: CardProps) => {
               alt="ui ux"
             />
             {/* end image  */}
+
+            {/* start title */}
+            <div className="text-sm font-Ubuntu text-dark-hard font-medium">
+              <h6 className="text-purple-600 text-sm font-Ubuntu inline-block mt-4 md:text-base">
+                {post?.title}
+              </h6>
+              <h3 className="text-sm font-Ubuntu text-dark-hard font-medium md:text-base lg:text-lg">
+                {post.caption}
+              </h3>
+              {/* start date  */}
+              <span className="text-xs opacity-60">{post.date}</span>
+              {/* end date  */}
+            </div>
+            {/* end title  */}
           </div>
         ))}
       </div>
