@@ -133,6 +133,37 @@ const Post: FC<PostProps> = (props) => {
     return [];
   };
 
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // handle input change
+    const { name, value } = event.target;
+
+    switch (name) {
+      case "imageId":
+        setImageId(value);
+        break;
+      case "title":
+        setTitle(value);
+        break;
+      case "caption":
+        setCaption(value);
+        break;
+      case "description":
+        setDescription(value);
+        break;
+      case "date":
+        setDate(value);
+        break;
+      case "tags":
+        setTags(value);
+        break;
+      case "categoryName":
+        setCategoryName(value);
+        break;
+      default:
+        break;
+    }
+  };
+
   const updatePost = (id: string) => {
     // update post
     let tagsArray = convertTagStringToArray(tags);
@@ -356,6 +387,7 @@ const Post: FC<PostProps> = (props) => {
                   variant="outlined"
                   name="title"
                   value={title}
+                  onChange={handleInputChange}
                   placeholder="Enter Article title"
                   fullWidth
                   required
@@ -367,6 +399,7 @@ const Post: FC<PostProps> = (props) => {
                   variant="outlined"
                   name="caption"
                   value={caption}
+                  onChange={handleInputChange}
                   placeholder="Enter Article Caption"
                   fullWidth
                   required
@@ -378,6 +411,7 @@ const Post: FC<PostProps> = (props) => {
                   variant="outlined"
                   name="description"
                   value={description}
+                  onChange={handleInputChange}
                   placeholder="Enter Article Description"
                   fullWidth
                   multiline
@@ -391,6 +425,7 @@ const Post: FC<PostProps> = (props) => {
                   variant="outlined"
                   name="date"
                   value={date}
+                  onChange={handleInputChange}
                   placeholder="Enter Date"
                   fullWidth
                   required
@@ -402,6 +437,7 @@ const Post: FC<PostProps> = (props) => {
                   variant="outlined"
                   name="categoryName"
                   value={categoryName}
+                  onChange={handleInputChange}
                   placeholder="Enter Category Name"
                   fullWidth
                   required
@@ -413,6 +449,7 @@ const Post: FC<PostProps> = (props) => {
                   variant="outlined"
                   name="tags"
                   value={tags}
+                  onChange={handleInputChange}
                   placeholder="Enter comma separated tags"
                   fullWidth
                   required
