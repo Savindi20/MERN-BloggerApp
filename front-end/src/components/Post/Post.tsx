@@ -4,6 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import axios from "../../axios";
 import {
   Box,
+  Button,
   Fade,
   Modal
 } from "@mui/material";
@@ -17,6 +18,7 @@ import Swal from "sweetalert2";
 const Post: FC<PostProps> = (props) => {
   // post component
   const [postArray, setPostArray] = useState<PostDetails[]>([]);
+  const [imageId, setImageId] = useState<any>(null);
   const [title, setTitle] = useState<string>("");
   const [caption, setCaption] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -48,6 +50,51 @@ const Post: FC<PostProps> = (props) => {
       );
       setCategoryName(filteredData[0].categoryName);
     });
+  };
+
+  const updatePost = (id: string) => {
+  
+    let updatePost = {
+      // create new post object
+      imageUrl: imageId,
+      title: title,
+      caption: caption,
+      description: description,
+      date: date,
+      userName: localStorage.getItem("id"),
+      categoryName: categoryName,
+    };
+  
+    axios
+      .put(`post/${id}`, updatePost)
+      .then((res) => {
+        console.log(res);
+        const updatedPost = res.data.responseData;
+        setPostArray((prevPosts) => {
+          const updatedArray = prevPosts.map((post) =>
+            post._id === updatedPost._id ? updatedPost : post
+          );
+          return updatedArray;
+        });
+        handleClose(); // Close the modal after updating the post
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Updated Successful..!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Something Went Wrong..!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
   
   const deletePost = (postId: string, props: PostProps) => {
@@ -88,7 +135,7 @@ const Post: FC<PostProps> = (props) => {
         });
       });
   };
-
+ 
   return (
     <>
       <div className="cursor-pointer p-6 bg-white text-slate-600 space-x-3 rounded-2xl shadow-2xl mt-1">
@@ -164,6 +211,21 @@ const Post: FC<PostProps> = (props) => {
       >
         <Fade in={open}>
           <Box>
+            <div className="modal-content mx-3 md:flex-row mb-4">
+            </div>
+            <div className="-mx-3 md:flex">
+              <div className="md:w-full px-3 mb-6 md:mb-0">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  style={{ borderRadius: "20px", backgroundColor: "#9333EA" }}
+                  onClick={() => updatePost(props._id)}
+                >
+                  Update Post
+                </Button>
+              </div>
+            </div>
           </Box>
         </Fade>
       </Modal>
