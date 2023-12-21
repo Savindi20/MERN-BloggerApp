@@ -349,6 +349,74 @@ const Post: FC<PostProps> = (props) => {
                   id="large_size"
                   type="file"
                 />
+
+                <TextField
+                  label="Article Title"
+                  type="text"
+                  variant="outlined"
+                  name="title"
+                  value={title}
+                  placeholder="Enter Article title"
+                  fullWidth
+                  required
+                />
+
+                <TextField
+                  label="Article Caption"
+                  type="text"
+                  variant="outlined"
+                  name="caption"
+                  value={caption}
+                  placeholder="Enter Article Caption"
+                  fullWidth
+                  required
+                />
+
+                <TextField
+                  label="Article Description"
+                  type="text"
+                  variant="outlined"
+                  name="description"
+                  value={description}
+                  placeholder="Enter Article Description"
+                  fullWidth
+                  multiline
+                  minRows={5}
+                  maxRows={Infinity}
+                  required
+                />
+
+                <TextField
+                  type="date"
+                  variant="outlined"
+                  name="date"
+                  value={date}
+                  placeholder="Enter Date"
+                  fullWidth
+                  required
+                />
+
+                <TextField
+                  label="Category"
+                  type="text"
+                  variant="outlined"
+                  name="categoryName"
+                  value={categoryName}
+                  placeholder="Enter Category Name"
+                  fullWidth
+                  required
+                />
+
+                <TextField
+                  label="Tags (Comma separated tags)"
+                  type="text"
+                  variant="outlined"
+                  name="tags"
+                  value={tags}
+                  placeholder="Enter comma separated tags"
+                  fullWidth
+                  required
+                />
               </ThemeProvider>
             </div>
             <div className="-mx-3 md:flex">
