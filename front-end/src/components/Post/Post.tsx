@@ -2,7 +2,11 @@ import { FC, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "../../axios";
-
+import {
+  Box,
+  Fade,
+  Modal
+} from "@mui/material";
 import { PostDetails } from "../../types/PostDetails";
 import { PostProps } from "../../types/PostProps";
 import { catergroy } from "../../types/Catergroy";
@@ -25,6 +29,7 @@ const Post: FC<PostProps> = (props) => {
 
 
   const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
 
   const handlUpdateSelectedRows = (id: string) => {
     // handle update selected rows
@@ -83,7 +88,6 @@ const Post: FC<PostProps> = (props) => {
         });
       });
   };
-  
 
   return (
     <>
@@ -146,6 +150,23 @@ const Post: FC<PostProps> = (props) => {
           {props.description}
         </p>
       </div>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropProps={{ timeout: 500 }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Fade in={open}>
+          <Box>
+          </Box>
+        </Fade>
+      </Modal>
     </>
   );
 };
