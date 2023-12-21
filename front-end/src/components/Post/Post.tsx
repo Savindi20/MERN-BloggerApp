@@ -1,10 +1,12 @@
 import { FC, useState } from "react";
 import { PostProps } from "../../types/PostProps";
 import { catergroy } from "../../types/Catergroy";
+import { image } from "../../types/Image";
 import { UserProps } from "../../types/User";
 
 const Post: FC<PostProps> = (props) => {
   const [categoryList, setCategoryList] = useState<catergroy[]>([]);
+  const [imageList, setImageList] = useState<image[]>([]);
   const [userList, setUserList] = useState<UserProps[]>([]);
 
   return (
@@ -43,8 +45,18 @@ const Post: FC<PostProps> = (props) => {
               </p>
             )}
           </div>
+          <img
+            className="flex justify-center items-center object-cover rounded-xl shadow-xl w-full"
+            src={
+              imageList.find((image) => image._id === props.imageId)?.imageUrl
+            }
+            alt="Image"
+          />
+
+          <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-rows-6 justify-end">
+          </div>
         </div>
-        
+
         <h2 className="text-center font-semibold font-babylonica">
           {props.caption}
         </h2>
