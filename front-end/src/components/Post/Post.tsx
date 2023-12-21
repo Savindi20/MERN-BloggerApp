@@ -37,6 +37,64 @@ const Post: FC<PostProps> = (props) => {
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
 
+  useEffect(() => {
+    getAllPost();
+    retrieveCategoryName();
+    retrieveImage();
+    retrieveAllUsers();
+  }, []);
+
+  const getAllPost = () => {
+    // get all posts
+    axios
+      .get("post")
+      .then((res) => {
+        setPostArray(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const retrieveCategoryName = () => {
+    // retrieve category name based on categoryId
+    axios
+      .get(`category`)
+      .then((res) => {
+        console.log(res);
+        setCategoryList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const retrieveImage = () => {
+    // retrieve image based on imageId
+    axios
+      .get(`image`)
+      .then((res) => {
+        console.log(res);
+        setImageList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const retrieveAllUsers = () => {
+    // retrieve all posts
+    axios
+      .get("user")
+      .then((res) => {
+        console.log(res);
+        setUserList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handlUpdateSelectedRows = (id: string) => {
     // handle update selected rows
     setOpen(true);
@@ -104,6 +162,7 @@ const Post: FC<PostProps> = (props) => {
         });
         clearState(); // Clear the input fields after updating the post
         handleClose(); // Close the modal after updating the post
+        getAllPost(); // Get all posts again after updating
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -143,6 +202,7 @@ const Post: FC<PostProps> = (props) => {
             if (props.removePostFromList) {
               props.removePostFromList(postId);
             }
+            getAllPost();
             Swal.fire(
               'Deleted!',
               'Your file has been deleted.',
