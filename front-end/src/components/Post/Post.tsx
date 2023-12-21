@@ -1,11 +1,14 @@
 import { FC, useState } from "react";
+import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import axios from "../../axios";
 
 import { PostDetails } from "../../types/PostDetails";
 import { PostProps } from "../../types/PostProps";
 import { catergroy } from "../../types/Catergroy";
 import { image } from "../../types/Image";
 import { UserProps } from "../../types/User";
+import Swal from "sweetalert2";
 
 const Post: FC<PostProps> = (props) => {
   // post component
@@ -40,6 +43,45 @@ const Post: FC<PostProps> = (props) => {
       );
       setCategoryName(filteredData[0].categoryName);
     });
+  };
+  
+  const deletePost = (postId: string, props: PostProps) => {
+    // delete post
+    axios
+      .delete(`post/${postId}`)
+      .then((res) => {
+        console.log(res);
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            if (props.removePostFromList) {
+              props.removePostFromList(postId);
+            }
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            )
+          }
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Something Went Wrong..!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
   
 
@@ -88,6 +130,9 @@ const Post: FC<PostProps> = (props) => {
           />
 
           <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-rows-6 justify-end">
+            <button onClick={() => deletePost(props._id, props)}>
+              <DeleteIcon style={{ color: "#e74c3c" }} />
+            </button>
             <button onClick={() => handlUpdateSelectedRows(props._id)}>
               <EditIcon style={{ color: "#2ecc71" }} />
             </button>
