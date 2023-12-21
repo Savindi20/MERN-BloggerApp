@@ -1,13 +1,47 @@
 import { FC, useState } from "react";
+import EditIcon from "@mui/icons-material/Edit";
+
+import { PostDetails } from "../../types/PostDetails";
 import { PostProps } from "../../types/PostProps";
 import { catergroy } from "../../types/Catergroy";
 import { image } from "../../types/Image";
 import { UserProps } from "../../types/User";
 
 const Post: FC<PostProps> = (props) => {
+  // post component
+  const [postArray, setPostArray] = useState<PostDetails[]>([]);
+  const [title, setTitle] = useState<string>("");
+  const [caption, setCaption] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [tags, setTags] = useState<string>("");
+  const [categoryName, setCategoryName] = useState<string>("");
   const [categoryList, setCategoryList] = useState<catergroy[]>([]);
   const [imageList, setImageList] = useState<image[]>([]);
   const [userList, setUserList] = useState<UserProps[]>([]);
+
+
+  const [open, setOpen] = useState(false);
+
+  const handlUpdateSelectedRows = (id: string) => {
+    // handle update selected rows
+    setOpen(true);
+    const filteredData = postArray.filter((post) => post._id === id);
+    console.log(filteredData);
+    filteredData.forEach(async (post) => {
+      // setImageId(post.imageId);
+      setTitle(post.title);
+      setCaption(post.caption);
+      setDescription(post.description);
+      setDate(post.date);
+      setTags(post.tags.join(", "));
+      const filteredData = categoryList.filter(
+        (catagroy) => catagroy._id === post.categoryId
+      );
+      setCategoryName(filteredData[0].categoryName);
+    });
+  };
+  
 
   return (
     <>
@@ -54,6 +88,9 @@ const Post: FC<PostProps> = (props) => {
           />
 
           <div className="grid grid-rows-1 sm:grid-rows-2 md:grid-rows-6 justify-end">
+            <button onClick={() => handlUpdateSelectedRows(props._id)}>
+              <EditIcon style={{ color: "#2ecc71" }} />
+            </button>
           </div>
         </div>
 
