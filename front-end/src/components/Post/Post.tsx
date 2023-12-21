@@ -1,12 +1,16 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "../../axios";
 import {
+  Backdrop,
   Box,
   Button,
   Fade,
-  Modal
+  Modal,
+  TextField,
+  ThemeProvider,
+  createTheme,
 } from "@mui/material";
 import { PostDetails } from "../../types/PostDetails";
 import { PostProps } from "../../types/PostProps";
@@ -158,7 +162,39 @@ const Post: FC<PostProps> = (props) => {
         });
       });
   };
- 
+  
+  function convertToBase64(e: any) {
+    // convert to base64
+    console.log(e);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      console.log(reader.result);
+      setImageId(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.log("errar :", error);
+    };
+  }
+
+  const theme = createTheme({
+    // for textfield rounded corners and shadow style
+    components: {
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              boxShadow:
+                "0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1)",
+              marginBottom: "10px",
+            },
+          },
+        },
+      },
+    },
+  });
+
   return (
     <>
       <div className="cursor-pointer p-6 bg-white text-slate-600 space-x-3 rounded-2xl shadow-2xl mt-1">
@@ -233,8 +269,27 @@ const Post: FC<PostProps> = (props) => {
         }}
       >
         <Fade in={open}>
-          <Box>
+          <Box
+            sx={{
+              width: "full",
+              maxWidth: "30%",
+              bgcolor: "background.paper",
+              p: 2,
+              borderRadius: "20px",
+              boxShadow:
+                "0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1)",
+            }}
+          >
             <div className="modal-content mx-3 md:flex-row mb-4">
+              <ThemeProvider theme={theme}>
+                <input
+                  className="block w-full text-lg text-gray-900 border border-gray-300 rounded-r-xl cursor-pointer bg-gray-50 dark:text-gray-400  dark:placeholder-gray-600"
+                  style={{ marginBottom: "10px" }}
+                  onChange={convertToBase64}
+                  id="large_size"
+                  type="file"
+                />
+              </ThemeProvider>
             </div>
             <div className="-mx-3 md:flex">
               <div className="md:w-full px-3 mb-6 md:mb-0">
