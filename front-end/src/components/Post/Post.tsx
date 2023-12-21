@@ -52,7 +52,28 @@ const Post: FC<PostProps> = (props) => {
     });
   };
 
+  const clearState = () => {
+    // clear all the input fields
+    setImageId("");
+    setTitle("");
+    setCaption("");
+    setDescription("");
+    setDate("");
+    setTags("");
+    setCategoryName("");
+  };
+
+  const convertTagStringToArray = (tagString: string): string[] => {
+    // convert tag string to array
+    if (tagString !== "") {
+      return tagString.split(",").map((tag) => tag.trim());
+    }
+    return [];
+  };
+
   const updatePost = (id: string) => {
+    // update post
+    let tagsArray = convertTagStringToArray(tags);
   
     let updatePost = {
       // create new post object
@@ -62,6 +83,7 @@ const Post: FC<PostProps> = (props) => {
       description: description,
       date: date,
       userName: localStorage.getItem("id"),
+      tags: tagsArray,
       categoryName: categoryName,
     };
   
@@ -76,6 +98,7 @@ const Post: FC<PostProps> = (props) => {
           );
           return updatedArray;
         });
+        clearState(); // Clear the input fields after updating the post
         handleClose(); // Close the modal after updating the post
         Swal.fire({
           position: "top-end",
