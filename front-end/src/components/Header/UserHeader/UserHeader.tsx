@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 
 
 function UserHeader() {
-  const navIsVisible = useState(false);
+  const [navIsVisible, setNavIsVisible] = useState(false);
   const navigate = useNavigate();
+
+  const navVisibilityHandler = () => {
+    setNavIsVisible((curState) => !curState);
+  };
 
   return (
     <section className="sticky top-0 left-0 right-0 z-50 bg-white">
@@ -20,6 +26,13 @@ function UserHeader() {
           {" "}
           {/* Add flex and items-center classes */}
           {/* <img className="w-16" src="" alt="logo" /> */}
+        </div>
+        <div className="lg:hidden z-50">
+          {navIsVisible ? (
+            <CloseIcon className="w-6 h-6" onClick={navVisibilityHandler} />
+          ) : (
+            <MenuIcon className="w-6 h-6" onClick={navVisibilityHandler} />
+          )}
         </div>
         <div
           className={`${
