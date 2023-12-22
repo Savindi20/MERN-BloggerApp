@@ -3,6 +3,48 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
 
+interface NavItem {
+  title: string;
+  link: string;
+}
+
+const NavItemsInfo = [
+  {
+    name: "Home",
+    type: "dropdown",
+    items: [
+      {
+        title: "Home",
+        link: "/adminHome",
+      },
+    ],
+  },
+  {
+    name: "Articles",
+    type: "dropdown",
+    items: [
+      { title: "Articles", link: "/adminArticle" },
+      { title: "Manage Articles", link: "/admin" },
+    ],
+  },
+  {
+    name: "Pages",
+    type: "dropdown",
+    items: [
+      { title: "About us", link: "/adminAbout" },
+      { title: "Contact us", link: "/adminContact" },
+    ],
+  },
+];
+
+interface HeaderProps {
+  item: {
+    name: string;
+    type: string;
+    items?: NavItem[];
+  };
+}
+
 
 function UserHeader() {
   const [navIsVisible, setNavIsVisible] = useState(false);
