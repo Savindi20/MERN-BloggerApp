@@ -1,6 +1,6 @@
 import React from "react";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { Divider } from "@mui/material";
+import { Divider, TextField, ThemeProvider } from "@mui/material";
 import AdminLayout from "../admin/AdminLayout";
 
 const Profile = () => {
@@ -23,6 +23,78 @@ const Profile = () => {
                 <form
                     className="flex flex-col space-y-3 w-full"
                   >
+                    <ThemeProvider theme="">
+                      <input
+                        className="block w-full text-lg text-gray-900 border border-gray-300 rounded-r-xl cursor-pointer bg-gray-50 dark:text-gray-400  dark:placeholder-gray-600"
+                        style={{
+                          boxShadow:
+                            "0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1)",
+                        }}
+                        id="large_size"
+                        type="file"
+                      />
+
+                      <TextField
+                        label="Article Title"
+                        type="text"
+                        variant="outlined"
+                        name="title"
+                        placeholder="Enter Article title"
+                        fullWidth={true}
+                        required
+                      />
+
+                      <TextField
+                        label="Article Caption"
+                        type="text"
+                        variant="outlined"
+                        name="caption"
+                        placeholder="Enter Article Caption"
+                        fullWidth={true}
+                        required
+                      />
+
+                      <TextField
+                        label="Article Description"
+                        type="text"
+                        variant="outlined"
+                        name="description"
+                        placeholder="Enter Article Description"
+                        fullWidth={true}
+                        multiline
+                        minRows={5}
+                        maxRows={Infinity}
+                        required
+                      />
+
+                      <TextField
+                        type="date"
+                        variant="outlined"
+                        name="date"
+                        placeholder="Enter Date"
+                        fullWidth={true}
+                      />
+
+                      <TextField
+                        label="Category"
+                        type="text"
+                        variant="outlined"
+                        name="categoryName"
+                        placeholder="Enter Category Name"
+                        fullWidth={true}
+                        required
+                      />
+
+                      <TextField
+                        label="Tags (Comma separated tags)"
+                        type="text"
+                        variant="outlined"
+                        name="tags"
+                        placeholder="Enter comma separated tags"
+                        fullWidth={true}
+                        required
+                      />
+                    </ThemeProvider>
                     <button className="py-2 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 transition-colors duration-300">
                       <h6 className="uppercase font-Ubuntu">Publish Post</h6>
                     </button>
