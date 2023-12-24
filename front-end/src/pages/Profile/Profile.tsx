@@ -1,26 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { Divider, TextField, ThemeProvider } from "@mui/material";
+import { Divider, TextField, ThemeProvider, createTheme } from "@mui/material";
 import AdminLayout from "../admin/AdminLayout";
 
 const Profile = () => {
+  const [isClickedCreateNewPost, setIsClickedCreateNewPost] =useState<boolean>(false);
+
+  const handleClickCreateNewPost = () => {
+    // handle click create new post
+    setIsClickedCreateNewPost((prevState) => !prevState);
+  };
 
   return (
     <>
       <AdminLayout>
         <div className="mt-20 py-6 px-32">
           <div className="w-full flex flex-col space-y-1">
-            <>
-              <div
+            {!isClickedCreateNewPost ? (
+              <>
+                <div
+                  className="cursor-pointer w-full p-4 bg-purple-600 text-white rounded-ss-2xl rounded-ee-2xl rounded-t-lg rounded-b-lg flex justify-between items-center shadow-2xl"
+                  onClick={handleClickCreateNewPost}
+                >
+                  <h6 className="uppercase font-Ubuntu font-bold">
+                    Create New Post
+                  </h6>
+                  <AddCircleIcon />
+                </div>
+                <div
+                  className="cursor-pointer p-8 bg-white text-slate-400 flex justify-center items-center space-x-3 rounded-ss-3xl rounded-ee-3xl rounded-t-lg  rounded-l-lg shadow-2xl"
+                  onClick={handleClickCreateNewPost}
+                >
+                  <PostAddIcon />
+                  <h6 className="uppercase font-Ubuntu font-bold">
+                    Your New Post
+                  </h6>
+                </div>
+              </>
+            ) : (
+              <>
+                <div
                   className="cursor-pointer w-full p-4 bg-purple-600 text-white rounded-ss-2xl rounded-ee-2xl rounded-t-lg rounded-b-lg flex justify-between items-center"
+                  onClick={handleClickCreateNewPost}
                 >
                   <h6 className="uppercase font-Ubuntu font-bold">
                     Discard Post
                   </h6>
                   <RemoveCircleIcon />
-              </div>
-              <div className="w-full cursor-pointer p-8 bg-white rounded-ss-3xl rounded-ee-3xl rounded-t-lg  rounded-l-lg text-slate-400 flex justify-center items-center space-x-3 shadow-2xl">
-                <form
+                </div>
+                <div className="w-full cursor-pointer p-8 bg-white rounded-ss-3xl rounded-ee-3xl rounded-t-lg  rounded-l-lg text-slate-400 flex justify-center items-center space-x-3 shadow-2xl">
+                  <form
                     className="flex flex-col space-y-3 w-full"
                   >
                     <ThemeProvider theme="">
@@ -98,9 +129,10 @@ const Profile = () => {
                     <button className="py-2 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 transition-colors duration-300">
                       <h6 className="uppercase font-Ubuntu">Publish Post</h6>
                     </button>
-                </form>
-              </div> 
-           </>
+                  </form>
+                </div>
+              </>
+            )}
           </div>
           <Divider className="!my-5" />
         </div>
