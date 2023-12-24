@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import images from "../../../constants/Images/images";
+import CheckIcon from "@mui/icons-material/Check";
 import { PostProps } from "../../../types/PostProps";
 
 const Card: FC<PostProps> = (props) => { // props: PostProps
@@ -26,6 +27,19 @@ const Card: FC<PostProps> = (props) => { // props: PostProps
               alt="post profile"
               className="w-9 h-9 md:w-10 md:h-10 "
             />
+            <div className="flex flex-col">
+              <h4 className="font-bold italic text-dark-soft text-sm md:text-base">
+                {props.userName}
+              </h4>
+              <div className="flex items-center gap-x-2">
+                <span className="bg-[#36B37E] w-fit bg-opacity-20 p-1.5 rounded-full">
+                  <CheckIcon className="w-1.5 h-1.5 text-[#36B37E]" />
+                </span>
+                <span className="italic text-dark-light text-xs md:text-sm">
+                  Verified writer
+                </span>
+              </div>
+            </div>
           </div>
           <span className="font-bold text-dark-light italic text-sm md:text-base">
             {props.date}
