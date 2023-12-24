@@ -1,15 +1,44 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import images from "../../../constants/Images/images";
 import CheckIcon from "@mui/icons-material/Check";
 import { PostProps } from "../../../types/PostProps";
+import { image } from "../../../types/Image";
+import axios from "../../../axios";
+import { useNavigate } from "react-router-dom";
 
 const Card: FC<PostProps> = (props) => { // props: PostProps
+  const [imageList, setImageList] = useState<image[]>([]); // imageList: image[]
+  const navigate = useNavigate(); // Add useNavigate hook
+
+  useEffect(() => { // useEffect
+    retrieveImage();
+  }, []);
+
+  const retrieveImage = () => {
+    // retrieve image based on imageId
+    axios
+      .get(`image`)
+      .then((res) => {
+        console.log(res);
+        setImageList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleCardClick = (postId: string) => {
+    localStorage.setItem("postId", postId); // Store postId in localStorage
+    navigate(`/adminArticleDetails/${postId}`); // Navigate to post details page
+  };
 
   return (
     <div
-      className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 transition-transform duration-300 hover:scale-105 ${ props.className }`}>
+      className={`rounded-xl overflow-hidden shadow-2xl shadow-purple-500/20 transition-transform duration-300 hover:scale-105 ${ props.className }`}
+      onClick={() => handleCardClick(props._id)}
+    >
       <img
-        src=""
+        src={imageList.find((image) => image._id === props.imageId)?.imageUrl}
         alt="title"
         className="w-full object-cover object-center h-auto md:h-52 lg:h-48 xl:h-60"
       />
