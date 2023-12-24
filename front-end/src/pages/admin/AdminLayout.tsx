@@ -1,11 +1,15 @@
-import React from 'react'
+import { ReactNode } from "react";
+import UserHeader from "../../components/Header/UserHeader/UserHeader";
 
-function AdminLayout() {
+interface AdminLayoutProps {
+  children: ReactNode;
+}
+const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <div>
-      
+      <UserHeader />
+      {children}
     </div>
-  )
-}
-
-export default AdminLayout
+  );
+};
+export default AdminLayout;
