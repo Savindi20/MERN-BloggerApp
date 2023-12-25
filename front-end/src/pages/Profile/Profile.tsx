@@ -13,6 +13,23 @@ const Profile = () => {
     setIsClickedCreateNewPost((prevState) => !prevState);
   };
 
+  const theme = createTheme({
+    // for textfield rounded corners and shadow style
+    components: {
+      MuiTextField: {
+        styleOverrides: {
+          root: {
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              boxShadow:
+                "0 2px 4px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1)",
+            },
+          },
+        },
+      },
+    },
+  });
+
   return (
     <>
       <AdminLayout>
@@ -54,7 +71,7 @@ const Profile = () => {
                   <form
                     className="flex flex-col space-y-3 w-full"
                   >
-                    <ThemeProvider theme="">
+                    <ThemeProvider theme={theme}>
                       <input
                         className="block w-full text-lg text-gray-900 border border-gray-300 rounded-r-xl cursor-pointer bg-gray-50 dark:text-gray-400  dark:placeholder-gray-600"
                         style={{
