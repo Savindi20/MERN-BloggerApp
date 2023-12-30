@@ -1,16 +1,145 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import Post from "../../components/Post";
+import { PostDetails } from "../../types/PostDetails";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { Divider, TextField, ThemeProvider, createTheme } from "@mui/material";
+import axios from "../../axios";
 import AdminLayout from "../admin/AdminLayout";
 
 const Profile = () => {
-  const [isClickedCreateNewPost, setIsClickedCreateNewPost] =useState<boolean>(false);
+  const [postList, setPostList] = useState<PostDetails[]>([]);
+  const [isClickedCreateNewPost, setIsClickedCreateNewPost] =
+    useState<boolean>(false);
+  const [imageId, setImageId] = useState<any>(null);
+  const [title, setTitle] = useState<string>("");
+  const [caption, setCaption] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [tags, setTags] = useState<string>("");
+  const [categoryName, setCategoryName] = useState<string>("");
+  const id = localStorage.getItem("id");
+  
+  useEffect(() => {
+    // use effect
+    retrieveAllPosts();
+  }, []);
+
+  // const filteredData = postList.filter((post) => post.userName === id);
+
+  const retrieveAllPosts = () => {
+    // retrieve all posts
+    axios
+      .get("post")
+      .then((res) => {
+        console.log(res);
+        setPostList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const filteredData = postList.filter((post) => post.userName === id);
+
+  console.log(filteredData);
 
   const handleClickCreateNewPost = () => {
     // handle click create new post
     setIsClickedCreateNewPost((prevState) => !prevState);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    // handle submit
+    event.preventDefault();
+    console.log("Submitted");
+
+    console.log({
+      imageId,
+      title,
+      caption,
+      description,
+      date,
+      id,
+      tags,
+      categoryName,
+    });
+
+    let tagsArray = convertTagStringToArray(tags);
+
+    let newPost = {
+      // create new post object
+      imageUrl: imageId,
+      title: title,
+      caption: caption,
+      description: description,
+      date: date,
+      userName: id,
+      tags: tagsArray,
+      categoryName: categoryName,
+    };
+
+    axios
+      .post("post", newPost)
+      .then((res) => {
+        console.log(res);
+        setPostList((prevList) => [...prevList, res.data.responseData]);
+        clearState();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const convertTagStringToArray = (tagString: string): string[] => {
+    // convert tag string to array
+    if (tagString !== "") {
+      return tagString.split(",").map((tag) => tag.trim());
+    }
+    return [];
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // handle input change
+    const { name, value } = event.target;
+
+    switch (name) {
+      case "imageId":
+        setImageId(value);
+        break;
+      case "title":
+        setTitle(value);
+        break;
+      case "caption":
+        setCaption(value);
+        break;
+      case "description":
+        setDescription(value);
+        break;
+      case "date":
+        setDate(value);
+        break;
+      case "tags":
+        setTags(value);
+        break;
+      case "categoryName":
+        setCategoryName(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const clearState = () => {
+    // clear all the input fields
+    setImageId("");
+    setTitle("");
+    setCaption("");
+    setDescription("");
+    setDate("");
+    setTags("");
+    setCategoryName("");
   };
 
   const theme = createTheme({
@@ -29,6 +158,19 @@ const Profile = () => {
       },
     },
   });
+
+  function convertToBase64(e: any) {
+    console.log(e);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      console.log(reader.result);
+      setImageId(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.log("errar :", error);
+    };
+  }
 
   return (
     <>
@@ -70,6 +212,7 @@ const Profile = () => {
                 <div className="w-full cursor-pointer p-8 bg-white rounded-ss-3xl rounded-ee-3xl rounded-t-lg  rounded-l-lg text-slate-400 flex justify-center items-center space-x-3 shadow-2xl">
                   <form
                     className="flex flex-col space-y-3 w-full"
+                    onSubmit={handleSubmit}
                   >
                     <ThemeProvider theme={theme}>
                       <input
@@ -80,6 +223,7 @@ const Profile = () => {
                         }}
                         id="large_size"
                         type="file"
+                        onChange={convertToBase64}
                       />
 
                       <TextField
@@ -88,6 +232,8 @@ const Profile = () => {
                         variant="outlined"
                         name="title"
                         placeholder="Enter Article title"
+                        onChange={handleInputChange}
+                        value={title}
                         fullWidth={true}
                         required
                       />
@@ -98,6 +244,8 @@ const Profile = () => {
                         variant="outlined"
                         name="caption"
                         placeholder="Enter Article Caption"
+                        onChange={handleInputChange}
+                        value={caption}
                         fullWidth={true}
                         required
                       />
@@ -108,6 +256,8 @@ const Profile = () => {
                         variant="outlined"
                         name="description"
                         placeholder="Enter Article Description"
+                        value={description}
+                        onChange={handleInputChange}
                         fullWidth={true}
                         multiline
                         minRows={5}
@@ -120,6 +270,8 @@ const Profile = () => {
                         variant="outlined"
                         name="date"
                         placeholder="Enter Date"
+                        onChange={handleInputChange}
+                        value={date}
                         fullWidth={true}
                       />
 
@@ -129,6 +281,8 @@ const Profile = () => {
                         variant="outlined"
                         name="categoryName"
                         placeholder="Enter Category Name"
+                        onChange={handleInputChange}
+                        value={categoryName}
                         fullWidth={true}
                         required
                       />
@@ -138,7 +292,9 @@ const Profile = () => {
                         type="text"
                         variant="outlined"
                         name="tags"
+                        value={tags}
                         placeholder="Enter comma separated tags"
+                        onChange={handleInputChange}
                         fullWidth={true}
                         required
                       />
@@ -151,7 +307,23 @@ const Profile = () => {
               </>
             )}
           </div>
+
           <Divider className="!my-5" />
+
+          {filteredData.map((post) => (
+            <Post
+              key={post._id}
+            _id={post._id}  
+            imageId={post.imageId}
+            title={post.title}
+            caption={post.caption}
+            description={post.description}
+            date={post.date}
+            userName={post.userName}
+            tags={post.tags}
+            categoryId={post.categoryId}
+            />
+          ))}
         </div>
       </AdminLayout>
     </>
