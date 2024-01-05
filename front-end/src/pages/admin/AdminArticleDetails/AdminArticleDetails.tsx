@@ -4,6 +4,7 @@ import { PostDetails } from "../../../types/PostDetails";
 import { image } from "../../../types/Image";
 
 import axios from "../../../axios";
+import SuggestPosts from "./container/AdminSuggestedPosts/AdminSuggestPosts";
 import AdminLayout from "../AdminLayout";
 import images from "../../../constants/Images/images";
 import BreadCrumbs from "../../../components/BreadCrumbs/BreadCrumbs";
@@ -143,6 +144,13 @@ const AdminArticleDetails = (): JSX.Element => {
             {/* end comments container  */}
           </article>
           <div>
+            {/* start suggested posts */}
+              <SuggestPosts
+                header={"Latest Articles"}
+                tags={tagsData}
+                className="mt-8 lg:mt-0 lg-max-w-xs"
+              />
+            {/* end suggested posts */}
             {/* start social share buttons */}
             <div className="mt-7 flex gap-4">
               <h2 className="font-Ubuntu font-medium text-dark-hard mb-4 md:text-xl">
