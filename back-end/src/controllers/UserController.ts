@@ -122,4 +122,47 @@ export default class UserController {
       }
     }
   };
+
+  signIn: RequestHandler = async (
+    // signIn is the function to sign in
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    try {
+      const { email, password } = req.body; // destructuring assignment
+
+      const user = await User.findOne({ email: email }); // find the user by email
+
+      if (user) {
+        // check whether the user exists or not
+        if (user.password == password) {
+          // check whether the password is correct or not
+          return res.status(200).json({
+            message: "Login Successfull..!",
+            // responseData: { name: user.name, email },
+            responseData: { id: user._id },
+
+          });
+        } else {
+          return res.status(500).json({
+            // return the response
+            message: "Your Password is Wrong..!",
+            responseData: password,
+          });
+        }
+      } else {
+        // return the response
+        return res
+          .status(500)
+          .json({ message: "Your Email is Wrong..!", responseData: email });
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        return res.status(500).json({ message: error.message });
+
+      return res.status(500).json({ message: "Unknown Error Occured..!" });
+    }
+  };
+  
 }

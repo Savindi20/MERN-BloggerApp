@@ -19,6 +19,8 @@ export default class UserRoutes {
     this.router.put("/:id", this.userController.updateUser); // updateUser is the function to update a user
     // DELETE /api/v1/user/:id
     this.router.delete("/:id", this.userController.deleteUser); // deleteUser is the function to delete a user
+    // POST /api/v1/user/sign-in
+    this.router.post("/sign-in", this.userController.signIn); // signIn is the function to sign in a user
   };
 
   public getRouter = (): Router => {
