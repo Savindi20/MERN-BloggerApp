@@ -59,4 +59,36 @@ export default class UserController {
       }
     }
   };
+
+  updateUser: RequestHandler = async (
+    // updateUser is the function to update a user
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    //update operation
+    try {
+      const { id } = req.params; // id is the id of the user
+
+      let updatedUser = await User.findByIdAndUpdate(id, req.body, {
+        //find the user by ID and update
+        new: true,
+      });
+
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      return res.status(200).json({
+        message: "User updated successfully.!",
+        responseData: updatedUser,
+      });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
 }

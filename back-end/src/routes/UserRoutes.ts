@@ -15,6 +15,8 @@ export default class UserRoutes {
     this.router.post("/", this.userController.registerUser); // registerUser is the function to register a user
     // GET /api/v1/user
     this.router.get("/", this.userController.retrieveAllUsers); // retrieveAllUsers is the function to retrieve all the users
+    // PUT /api/v1/user/:id
+    this.router.put("/:id", this.userController.updateUser); // updateUser is the function to update a user
   };
 
   public getRouter = (): Router => {
