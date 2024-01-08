@@ -91,4 +91,35 @@ export default class UserController {
       }
     }
   };
+
+  deleteUser: RequestHandler = async (
+    // deleteUser is the function to delete a user
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    //delete operation
+    try {
+      const { id } = req.params; // id is the id of the user
+
+      let deletedUser = await User.findByIdAndDelete(id); // find the user by ID and delete
+
+      if (!deletedUser) {
+        // check whether the user exists or not
+        return res.status(404).json({ message: "User not found" });
+      }
+      return res // return the response
+        .status(200)
+        .json({
+          message: "User deleted successfully.!",
+          responseData: deletedUser,
+        });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
 }

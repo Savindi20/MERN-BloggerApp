@@ -17,6 +17,8 @@ export default class UserRoutes {
     this.router.get("/", this.userController.retrieveAllUsers); // retrieveAllUsers is the function to retrieve all the users
     // PUT /api/v1/user/:id
     this.router.put("/:id", this.userController.updateUser); // updateUser is the function to update a user
+    // DELETE /api/v1/user/:id
+    this.router.delete("/:id", this.userController.deleteUser); // deleteUser is the function to delete a user
   };
 
   public getRouter = (): Router => {
