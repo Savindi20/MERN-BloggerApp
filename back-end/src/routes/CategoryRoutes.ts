@@ -12,6 +12,8 @@ export default class CategoryRoutes { // CategoryRoutes is the class of the cate
   private configRoutes = (): void => { // configRoutes() is used to configure the routes
     // POST /api/v1/category
     this.router.post("/", this.categoryController.createCategory);
+    // GET /api/v1/category
+    this.router.get("/", this.categoryController.retrieveAllCategories);
   };
 
   public getRouter = (): Router => { 
