@@ -86,5 +86,30 @@ export default class CommentController {
     }
   };
 
+  deleteComment = async (req: Request, res: Response): Promise<Response> => {
+    // deleteComment is the function to delete a comment
+    try {
+      // destructuring assignment
+      const { id } = req.params; // id is the id of the comment
 
+      let deletedComment = await Comment.findByIdAndDelete(id); // findByIdAndDelete() is used to find the document by id and delete
+
+      if (!deletedComment) {
+        // check whether the comment is deleted or not
+        throw new Error("Failed to delete comment.");
+      }
+
+      return res // return the response
+        .status(200)
+        .json({ message: "Comment deleted.", responseData: deletedComment });
+    } catch (error: unknown) {
+      // catch block is used to handle the errors
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
+  
 }
