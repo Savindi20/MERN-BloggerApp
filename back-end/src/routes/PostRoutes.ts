@@ -12,6 +12,8 @@ export default class PostRoutes {
     this.router.post("/", this.postController.createPost);
     // GET /api/v1/post
     this.router.get("/", this.postController.retrieveAllPosts);
+    // PUT /api/v1/post/:id
+    this.router.put("/:id", this.postController.updatePost);
   };
 
   public getRouter = (): Router => {

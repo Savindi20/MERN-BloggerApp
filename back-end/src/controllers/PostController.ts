@@ -116,5 +116,31 @@ export default class PostController {
     }
   };
 
+  updatePost: RequestHandler = async (
+    // updatePost is the function to update a post
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    //update operation
+    try {
+      const { id } = req.params; // params is used to get the parameters of the request
+      let updatedPost = await Post.findByIdAndUpdate(id, req.body, {
+        // findByIdAndUpdate() is used to find the document by id and update
+        new: true,
+      });
+      return res
+        .status(200)
+        .json({ message: "Post updated.", responseData: updatedPost });
+    } catch (error: unknown) {
+      // catch block is used to handle the errors
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
+  
 }
 
