@@ -165,6 +165,24 @@ export default class PostController {
       }
     }
   };
+
+  getAllPosts: RequestHandler = async ( // getAllPosts is the function to get all the posts
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    //read operation
+    try {
+      const posts = await Post.findById(req.params.id); // findById() is used to find the document by id
+      return res.status(200).json({ responseData: posts });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
   
 }
 
