@@ -12,6 +12,8 @@ export default class CommentRoutes { // CommentRoutes is the class of the commen
   private configRoutes = (): void => { // configRoutes() is used to configure the routes
     // POST /api/v1/comment
     this.router.post("/", this.commentController.createComment);
+    // GET /api/v1/comment
+    this.router.get("/", this.commentController.retrieveAllComments);
   };
 
   public getRouter = (): Router => { 
