@@ -7,10 +7,11 @@ export default class PostRoutes {
     this.configRoutes();
   }
   private configRoutes = (): void => {
-    
+
     // POST /api/v1/post
     this.router.post("/", this.postController.createPost);
-
+    // GET /api/v1/post
+    this.router.get("/", this.postController.retrieveAllPosts);
   };
 
   public getRouter = (): Router => {
