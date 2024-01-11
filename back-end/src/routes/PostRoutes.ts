@@ -14,6 +14,8 @@ export default class PostRoutes {
     this.router.get("/", this.postController.retrieveAllPosts);
     // PUT /api/v1/post/:id
     this.router.put("/:id", this.postController.updatePost);
+    // DELETE /api/v1/post/:id
+    this.router.delete("/:id", this.postController.deletePost);
   };
 
   public getRouter = (): Router => {

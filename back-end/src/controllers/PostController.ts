@@ -141,6 +141,30 @@ export default class PostController {
       }
     }
   };
+
+  deletePost: RequestHandler = async (
+    // deletePost is the function to delete a post
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    //delete operation
+    try {
+      const { id } = req.params; // params is used to get the parameters of the request
+      let deletedPost = await Post.findByIdAndDelete(id); // findByIdAndDelete() is used to find the document by id and delete
+
+      return res
+        .status(200)
+        .json({ message: "Post deleted.", responseData: deletedPost });
+    } catch (error: unknown) {
+      // catch block is used to handle the errors
+      if (error instanceof Error) {
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
   
 }
 
