@@ -59,4 +59,32 @@ export default class CommentController {
     }
   };
 
+  updateComment: RequestHandler = async (
+    // updateComment is the function to update a comment
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Promise<Response> is the return type of the function
+    try {
+      // destructuring assignment
+      const { id } = req.params; // id is the id of the comment
+
+      let updatedComment = await Comment.findByIdAndUpdate(id, req.body, {
+        // findByIdAndUpdate() is used to find the document by id and update
+        new: true,
+      });
+      return res // return the response
+        .status(200)
+        .json({ message: "Comment updated.", responseData: updatedComment });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        // catch block is used to handle the errors
+        return res.status(500).json({ message: error.message });
+      } else {
+        return res.status(500).json({ message: "Unknown error occured." });
+      }
+    }
+  };
+
+
 }
