@@ -180,7 +180,7 @@ const Profile = () => {
             {!isClickedCreateNewPost ? (
               <>
                 <div
-                  className="cursor-pointer w-full p-4 bg-purple-600 text-white rounded-ss-2xl rounded-ee-2xl rounded-t-lg rounded-b-lg flex justify-between items-center shadow-2xl"
+                  className="cursor-pointer w-full p-4 bg-blue-600 text-white rounded-ss-2xl rounded-ee-2xl rounded-t-lg rounded-b-lg flex justify-between items-center shadow-2xl"
                   onClick={handleClickCreateNewPost}
                 >
                   <h6 className="uppercase font-Ubuntu font-bold">
@@ -201,7 +201,7 @@ const Profile = () => {
             ) : (
               <>
                 <div
-                  className="cursor-pointer w-full p-4 bg-purple-600 text-white rounded-ss-2xl rounded-ee-2xl rounded-t-lg rounded-b-lg flex justify-between items-center"
+                  className="cursor-pointer w-full p-4 bg-blue-600 text-white rounded-ss-2xl rounded-ee-2xl rounded-t-lg rounded-b-lg flex justify-between items-center"
                   onClick={handleClickCreateNewPost}
                 >
                   <h6 className="uppercase font-Ubuntu font-bold">
@@ -299,7 +299,7 @@ const Profile = () => {
                         required
                       />
                     </ThemeProvider>
-                    <button className="py-2 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 transition-colors duration-300">
+                    <button className="py-2 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition-colors duration-300">
                       <h6 className="uppercase font-Ubuntu">Publish Post</h6>
                     </button>
                   </form>

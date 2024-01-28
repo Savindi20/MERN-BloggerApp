@@ -32,7 +32,7 @@ const AdminCTA = () => {
                 className="px-4 py-3 rounded-lg w-full placeholder:text-dark-light"
                 placeholder="Your Email"
               />
-              <button className="px-4 py-3 rounded-lg w-full bg-purple-600 text-white font-bold md:w-fit md:whitespace-nowrap">
+              <button className="px-4 py-3 rounded-lg w-full bg-blue-600 text-white font-bold md:w-fit md:whitespace-nowrap">
                 Get started
               </button>
             </div>
@@ -46,7 +46,7 @@ const AdminCTA = () => {
           </div>
           <div className="col-span-12 hidden mb-[70px] md:block md:order-first lg:col-span-6 lg:order-last">
             <div className="w-3/4 mx-auto relative">
-              <div className="w-1/2 h-1/2 bg-[#ad52ad] rounded-lg absolute top-[10%] -right-[8%]" />
+              <div className="w-1/2 h-1/2 bg-[#525bad] rounded-lg absolute top-[10%] -right-[8%]" />
               <div className="w-1/2 h-1/2 bg-white rounded-lg opacity-[.06] absolute -bottom-[10%] -left-[8%]" />
               <div className="w-full rounded-xl bg-white p-3 z-[1] relative">
                 <img

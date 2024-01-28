@@ -24,7 +24,7 @@ const Hero = () => {
               placeholder="Search article"
             />
           </div>
-          <button className="w-full bg-purple-600 text-white font-semibold rounded-lg px-5 py-3 md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2 md:w-fit md:py-2">
+          <button className="w-full bg-blue-600 text-white font-semibold rounded-lg px-5 py-3 md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2 md:w-fit md:py-2">
             Search
           </button>
         </div>
@@ -33,10 +33,10 @@ const Hero = () => {
             Popular Tags
           </span>
           <ul className="flex flex-wrap gap-x-2.5 gap-y-2.5 mt-3 lg:text-sm xl:text-base">
-            <li className="rounded-lg bg-purple-600 bg-opacity-10 px-3 py-1.5 text-purple-600 font-semibold">
+            <li className="rounded-lg bg-blue-600 bg-opacity-10 px-3 py-1.5 text-blue-600 font-semibold">
               UI
             </li>
-            <li className="rounded-lg bg-purple-600 bg-opacity-10 px-3 py-1.5 text-purple-600 font-semibold">
+            <li className="rounded-lg bg-blue-600 bg-opacity-10 px-3 py-1.5 text-blue-600 font-semibold">
               UX
             </li>
           </ul>

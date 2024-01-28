@@ -60,7 +60,7 @@ const NavItem: React.FC<HeaderProps> = ({ item }) => {
           <a href="/" className="px-4 py-2">
             {item.name}
           </a>
-          <span className="cursor-pointer text-purple-600 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
+          <span className="cursor-pointer text-blue-600 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
             /
           </span>
         </>
@@ -78,7 +78,7 @@ const NavItem: React.FC<HeaderProps> = ({ item }) => {
               dropdown ? "block" : "hidden"
             } lg:hidden transition-all duration-500 pt-4 lg:absolute lg:bottom-0 lg:right-0 lg:transform lg:translate-y-full lg:group-hover:block w-max`}
           >
-            <ul className="bg-dark-soft lg:bg-transparent text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
+            <ul className="bg-dark-soft lg:bg-white text-center flex flex-col shadow-lg rounded-lg overflow-hidden">
               {item.items?.map((page, index) => (
                 <a
                   key={index}
@@ -138,7 +138,7 @@ function UserHeader() {
           </ul>
           <button
             onClick={() => navigate("/")}
-            className="mt-5 lg:mt-0 font-Ubuntu border-2 border-purple-600 px-6 py-2 rounded-full text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 text-center"
+            className="mt-5 lg:mt-0 font-Ubuntu border-2 border-blue-600 px-6 py-2 rounded-full text-blue-600 font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 text-center"
           >
             Log Out
           </button>

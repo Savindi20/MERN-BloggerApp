@@ -72,7 +72,7 @@ const AdminSuggestPosts = ({ className, header, tags }: CardProps) => {
 
             {/* start title */}
             <div className="text-sm font-Ubuntu text-dark-hard font-medium">
-              <h6 className="text-purple-600 text-sm font-Ubuntu inline-block mt-4 md:text-base">
+              <h6 className="text-blue-600 text-sm font-Ubuntu inline-block mt-4 md:text-base">
                 {post?.title}
               </h6>
               <h3 className="text-sm font-Ubuntu text-dark-hard font-medium md:text-base lg:text-lg">
@@ -95,7 +95,7 @@ const AdminSuggestPosts = ({ className, header, tags }: CardProps) => {
             <Link
               key={index}
               to=""
-              className="inline-block rounded-md px-3 py-1.5 bg-purple-600 font-Ubuntu text-xs text-white md:text-sm transition-transform duration-300 hover:scale-105 shadow-2xl"
+              className="inline-block rounded-md px-3 py-1.5 bg-blue-600 font-Ubuntu text-xs text-white md:text-sm transition-transform duration-300 hover:scale-105 shadow-2xl"
             >
               {item.tags.join(", ")}
             </Link>

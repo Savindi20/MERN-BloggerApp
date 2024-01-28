@@ -28,7 +28,7 @@ const CommentForm = ({
   return (
     // start form
     <form onSubmit={submitHandler}>
-      <div className="flex flex-col items-end border border-purple-600 rounded-lg p-4">
+      <div className="flex flex-col items-end border border-blue-600 rounded-lg p-4">
         {/* start textarea  */}
         <textarea
           className="w-full focus:outline-none bg-transparent"
@@ -43,7 +43,7 @@ const CommentForm = ({
             Cancel</button>}
           <button
             type="submit"
-            className="px-6 py-2.5 rounded-lg bg-purple-600 text-white font-semibold"
+            className="px-6 py-2.5 rounded-lg bg-blue-600 text-white font-semibold"
           >
             {btnLabel}
           </button>

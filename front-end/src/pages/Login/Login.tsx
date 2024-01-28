@@ -104,19 +104,19 @@ const Login = () => {
                 className={`placeholder:text-[#959ead] text-dark-hard mt-3 rounded-lg px-5 py-4 font-semibold block outline-none border`}
               />
             </div>
-            <Link to="" className="text-sm font-semibold text-primary">
+            <Link to="" className="text-sm font-semibold text-purple-900">
               Forgot password?
             </Link>
             <button
               type="submit"
               disabled={false}
-              className="bg-purple-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="bg-blue-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg my-6 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               Sign In
             </button>
             <p className="text-sm font-semibold text-[#5a7184]">
               Do not have an account?{" "}
-              <Link to="/register" className="text-primary">
+              <Link to="/register" className="text-purple-900">
                 Register now
               </Link>
             </p>

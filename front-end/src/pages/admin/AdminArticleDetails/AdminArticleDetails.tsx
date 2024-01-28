@@ -128,7 +128,7 @@ const AdminArticleDetails = (): JSX.Element => {
             {/* start discription */}
             <Link
               to={""}
-              className="text-purple-600 text-sm font-Ubuntu inline-block mt-4 md:text-base"
+              className="text-blue-600 text-sm font-Ubuntu inline-block mt-4 md:text-base"
             >
               {post?.title}
             </Link>

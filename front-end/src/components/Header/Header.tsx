@@ -48,7 +48,7 @@ const NavItem: React.FC<HeaderProps> = ({ item }) => {
           <a href="/" className="px-4 py-2">
             {item.name}
           </a>
-          <span className="cursor-pointer text-purple-600 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
+          <span className="cursor-pointer text-blue-600 absolute transition-all duration-500 font-bold right-0 top-0 group-hover:right-[90%] opacity-0 group-hover:opacity-100">
             /
           </span>
         </>
@@ -115,7 +115,7 @@ const Header: React.FC = () => {
           </ul>
           <button
             onClick={() => navigate("/login")}
-            className="mt-5 lg:mt-0 font-Ubuntu border-2 border-purple-600 px-6 py-2 rounded-full text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition-all duration-300 text-center"
+            className="mt-5 lg:mt-0 font-Ubuntu border-2 border-blue-600 px-6 py-2 rounded-full text-blue-600 font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 text-center"
           >
             Sign in
           </button>

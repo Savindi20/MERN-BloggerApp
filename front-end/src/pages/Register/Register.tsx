@@ -162,13 +162,13 @@ function Register() {
             <button
               type="submit"
               disabled={isRegisterButtonDisabled}
-              className="bg-purple-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="bg-blue-600 text-white font-bold text-lg py-4 px-8 w-full rounded-lg mb-6 disabled:opacity-70 disabled:cursor-not-allowed"
             >
               Register
             </button>
             <p className="text-sm font-semibold text-[#5a7184]">
               You have an account?{" "}
-              <Link to="/login" className="text-primary">
+              <Link to="/login" className="text-purple-900">
                 Login now
               </Link>
             </p>
