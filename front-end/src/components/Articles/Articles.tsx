@@ -54,7 +54,7 @@ const Articles = () => {
       {!showAllPosts && (
         <button
           onClick={handleShowAllPosts}
-          className="mx-auto flex items-center gap-x-2 font-bold text-blue-600 border-2 border-blue-600 px-6 py-3 rounded-lg transition duration-300 ease-in-out hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-700 hover:border-blue-800 hover:text-white"
+          className="mx-auto flex items-center gap-x-2 font-bold text-blue-800 border-2 border-blue-800 px-6 py-3 rounded-lg transition duration-300 ease-in-out hover:bg-gradient-to-r hover:from-blue-700 hover:to-blue-800 hover:border-blue-800 hover:text-white"
         >
           <span>More articles</span>
           <KeyboardArrowRightIcon className="w-3 h-3" />

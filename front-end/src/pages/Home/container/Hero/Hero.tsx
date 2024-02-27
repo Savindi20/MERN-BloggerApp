@@ -10,10 +10,7 @@ const Hero = () => {
           Read the most interesting articles
         </h1>
         <p className="text-dark-light mt-4 text-center md:text-xl lg:text-base xl:text-xl lg:text-left">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga mollitia
-          dolorem beatae ipsa, laboriosam assumenda perspiciatis aut culpa ex,
-          numquam deleniti distinctio! Eos, doloremque. Laboriosam repudiandae
-          cumque amet totam minus?
+        This blog is your one-stop shop for everything related to User Interface (UI) and User Experience (UX) design. Whether you're a seasoned professional, a curious beginner, or simply interested in how the digital world works, we've got something for you.
         </p>
         <div className="flex flex-col gap-y-2.5 mt-10 lg:mt-6 xl:mt-10 relative">
           <div className="relative">
@@ -24,7 +21,7 @@ const Hero = () => {
               placeholder="Search article"
             />
           </div>
-          <button className="w-full bg-blue-600 text-white font-semibold rounded-lg px-5 py-3 md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2 md:w-fit md:py-2">
+          <button className="w-full bg-blue-800 text-white font-semibold rounded-lg px-5 py-3 md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2 md:w-fit md:py-2">
             Search
           </button>
         </div>
@@ -33,10 +30,10 @@ const Hero = () => {
             Popular Tags
           </span>
           <ul className="flex flex-wrap gap-x-2.5 gap-y-2.5 mt-3 lg:text-sm xl:text-base">
-            <li className="rounded-lg bg-blue-600 bg-opacity-10 px-3 py-1.5 text-blue-600 font-semibold">
+            <li className="rounded-lg bg-blue-800 bg-opacity-10 px-3 py-1.5 text-blue-800 font-semibold">
               UI
             </li>
-            <li className="rounded-lg bg-blue-600 bg-opacity-10 px-3 py-1.5 text-blue-600 font-semibold">
+            <li className="rounded-lg bg-blue-800 bg-opacity-10 px-3 py-1.5 text-blue-800 font-semibold">
               UX
             </li>
           </ul>

@@ -70,10 +70,10 @@ const Footer = () => {
           <img
             src={images.LogoImage}
             alt="logo"
-            className="w-14 h-14 rounded-full"
+            className="w-14 h-14"
           />
           <p className="text-sm text-dark-light text-center mt-4 md:text-left md:text-base lg:text-sm">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Subscribe to our blog today and unlock a world of design possibilities!
           </p>
           {/* end logo  */}
           {/* start social media icons */}
